@@ -15,9 +15,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Repository
 public class InitDataBase {
-    @Autowired
+@Autowired
    private ProfileRepository profileRepository;
-    @Autowired
+@Autowired
     private CardRepository cardRepository;
 
     public void adminInit() {

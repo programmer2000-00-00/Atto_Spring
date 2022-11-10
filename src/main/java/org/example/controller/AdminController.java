@@ -7,11 +7,15 @@ import org.example.service.TerminalService;
 import org.example.service.TransactionService;
 import org.example.util.ScannerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 @Controller
 public class AdminController {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     @Autowired
     private CardService cardService;
     @Autowired
@@ -26,7 +30,7 @@ public class AdminController {
     public void setTransactionService(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
-
+    @Autowired
     private TransactionService transactionService;
 
     public void start( ) {

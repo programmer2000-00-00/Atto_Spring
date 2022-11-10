@@ -1,5 +1,7 @@
 package org.example.db;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -8,21 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 @Repository
 public class DataBase {
-    public static Connection getConnection() {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/atto_db",
-                    "atto_db_user", "12345");
-            return con;
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState());
-            e.printStackTrace();
-            System.exit(-1);
-        }
-        return null;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-    }
-
-    public static void initTable() {
+    public  void initDatabase() {
 
         String profile = "create table if not exists profile ( \n" +
                 "             id serial primary key,\n" +
@@ -63,21 +54,13 @@ public class DataBase {
                 "created_date timestamp default now()," +
                 " foreign key(card_id) references  card(id), " +
                 " foreign key(terminal_id) references  terminal(id)) ;";
-
-        execute(profile);
-        execute(card);
-        execute(terminal);
-        execute(transaction);
+        jdbcTemplate.execute(profile);
+        jdbcTemplate.execute(card);
+        jdbcTemplate.execute(transaction);
+        jdbcTemplate.execute(terminal);
     }
 
-    private static void execute(String sql) {
-        try (Connection connection = getConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
 }

@@ -50,7 +50,7 @@ public class TerminalService {
         if (terminal.getStatus().equals(GeneralStatus.ACTIVE)) {
             terminalRepository.changeTerminalStatus(code, GeneralStatus.BLOCK);
         } else {
-            terminalRepository.changeTerminalStatus(code, GeneralStatus.BLOCK);
+            terminalRepository.changeTerminalStatus(code, GeneralStatus.ACTIVE);
         }
 
     }

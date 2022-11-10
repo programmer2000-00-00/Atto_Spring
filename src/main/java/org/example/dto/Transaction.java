@@ -61,4 +61,16 @@ public class Transaction {
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", cardId=" + cardId +
+                ", amount=" + amount +
+                ", terminalId=" + terminalId +
+                ", transactionType=" + transactionType +
+                ", createdDate=" + createdDate +
+                '}';
+    }
 }
